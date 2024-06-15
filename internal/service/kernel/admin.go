@@ -204,7 +204,7 @@ func AdminPage(ctx echo.Context) error {
 	return ctx.JSON(utils.Page("succ", mods, count))
 }
 
-// AdminPage doc
+// AdminAll AdminPage doc
 // @Auth mgmt
 // @Tags kernel
 // @Summary 获取admin分页数据

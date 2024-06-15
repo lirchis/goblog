@@ -260,3 +260,94 @@ time=2024-06-15T19:31:58.624 level=INF trace=b8acfca9 caller=D:/root/code/goblog
 time=2024-06-15T19:31:58.624 level=INF caller=D:/root/code/goblog/test.go:42 msg="app running"
 time=2024-06-15T19:32:06.519 level=INF caller=echo ip=::1 GET=/api/admin/all span=0s
 time=2024-06-15T19:32:22.202 level=INF caller=D:/root/code/goblog/test.go:66 msg="app quitted"
+time=2024-06-15T19:49:41.043 level=INF trace=7d2878c4 caller=D:/root/code/goblog/test.go:36 msg="app initializing"
+time=2024-06-15T19:49:41.046 level=INF trace=7d2878c4 caller=D:/root/code/goblog/internal/repo/repo.go:35 msg="use db :sqlite"
+time=2024-06-15T19:49:41.046 level=INF trace=7d2878c4 caller=D:/root/code/goblog/internal/repo/repo.go:37 msg="orm hijack log :true"
+time=2024-06-15T19:49:41.046 level=INF caller=xorm msg="PING DATABASE sqlite"
+time=2024-06-15T19:49:41.047 level=INF trace=7d2878c4 caller=D:/root/code/goblog/internal/repo/repo.go:51 msg="show sql true"
+time=2024-06-15T19:49:41.047 level=INF trace=7d2878c4 caller=D:/root/code/goblog/internal/repo/repo.go:53 msg="use cache true"
+time=2024-06-15T19:49:41.048 level=INF caller=xorm msg="[SQL] SELECT name FROM sqlite_master WHERE type='table' [] - 1.0512ms"
+time=2024-06-15T19:49:41.048 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [tag]"
+time=2024-06-15T19:49:41.049 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [tag]"
+time=2024-06-15T19:49:41.049 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [cate]"
+time=2024-06-15T19:49:41.050 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [cate] - 542µs"
+time=2024-06-15T19:49:41.050 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [post]"
+time=2024-06-15T19:49:41.050 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [post]"
+time=2024-06-15T19:49:41.050 level=WRN caller=xorm msg="Table post Column kind db default is 1, struct default is "
+time=2024-06-15T19:49:41.050 level=WRN caller=xorm msg="Table post Column kind db nullable is false, struct nullable is true"
+time=2024-06-15T19:49:41.050 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [post_tag] - 526.3µs"
+time=2024-06-15T19:49:41.050 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [post_tag]"
+time=2024-06-15T19:49:41.050 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [dict]"
+time=2024-06-15T19:49:41.051 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [dict]"
+time=2024-06-15T19:49:41.051 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [role]"
+time=2024-06-15T19:49:41.051 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [role]"
+time=2024-06-15T19:49:41.051 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [grant]"
+time=2024-06-15T19:49:41.051 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [grant]"
+time=2024-06-15T19:49:41.051 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [admin]"
+time=2024-06-15T19:49:41.052 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [admin]"
+time=2024-06-15T19:49:41.052 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='table' and name = ? [role_grant]"
+time=2024-06-15T19:49:41.052 level=INF caller=xorm msg="[SQL] SELECT sql FROM sqlite_master WHERE type='index' and tbl_name = ? [role_grant]"
+time=2024-06-15T19:49:41.053 level=INF caller=xorm msg="[SQL] SELECT `key`, `value`, `kind`, `inner`, `intro`, `updated`, `created` FROM `dict` WHERE `key`=? LIMIT 1 [basic] - 505µs"
+time=2024-06-15T19:49:41.053 level=INF caller=D:/root/code/goblog/internal/repo/ker_repo.go:37 msg="basic cache"
+time=2024-06-15T19:49:41.053 level=INF caller=xorm msg="[SQL] SELECT `key`, `value`, `kind`, `inner`, `intro`, `updated`, `created` FROM `dict` WHERE `key`=? LIMIT 1 [blog]"
+time=2024-06-15T19:49:41.053 level=INF caller=D:/root/code/goblog/internal/repo/ker_repo.go:61 msg="blog cache"
+time=2024-06-15T19:49:41.054 level=INF trace=7d2878c4 caller=D:/root/code/goblog/internal/repo/repo.go:80 msg="model init"
+time=2024-06-15T19:49:41.266 level=INF caller=D:/root/code/goblog/test.go:42 msg="app running"
+time=2024-06-15T19:50:47.059 level=INF caller=xorm msg="[SQL] SELECT `id`, `title`, `path`, `created`, `summary` FROM `post` WHERE (kind = ?) ORDER BY `id` DESC LIMIT 6 [1] - 1.5928ms"
+time=2024-06-15T19:50:47.061 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `post` WHERE (kind = ?) [1] - 1.0422ms"
+time=2024-06-15T19:50:47.074 level=INF caller=echo ip=::1 GET=/ span=18.9386ms
+time=2024-06-15T19:50:59.517 level=INF caller=xorm msg="[SQL] SELECT `id`, `guid`, `name`, `group`, `routes`, `sort`, `inner`, `updated`, `created` FROM `grant` [] - 528.9µs"
+time=2024-06-15T19:50:59.518 level=INF caller=echo ip=127.0.0.1 GET=/api/auth/grant span=7.4545ms
+time=2024-06-15T19:51:00.292 level=INF caller=echo ip=127.0.0.1 GET=/api/status/go span=0s
+time=2024-06-15T19:51:00.295 level=INF caller=xorm msg="[SQL] SELECT `id`, `num`, `name`, `passwd`, `avatar`, `salt`, `phone`, `email`, `role_id`, `updated`, `created` FROM `admin` WHERE `id`=? LIMIT 1 [1] - 798.7µs"
+time=2024-06-15T19:51:00.295 level=INF caller=echo ip=127.0.0.1 GET=/api/auth/get span=3.8963ms
+time=2024-06-15T19:51:04.627 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `log` [] - 551.8µs"
+time=2024-06-15T19:51:04.627 level=INF caller=echo ip=127.0.0.1 GET=/api/log/page?pi=1&ps=12&mult= span=1.092ms
+time=2024-06-15T19:51:06.349 level=INF caller=echo ip=127.0.0.1 GET=/api/status/go span=0s
+time=2024-06-15T19:51:08.059 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `log` []"
+time=2024-06-15T19:51:08.059 level=INF caller=echo ip=127.0.0.1 GET=/api/log/page?pi=1&ps=12&mult= span=494µs
+time=2024-06-15T19:51:25.647 level=INF caller=echo ip=127.0.0.1 GET=/api/auth/grant span=508.8µs
+time=2024-06-15T19:51:25.928 level=INF caller=xorm msg="[SQL] SELECT `key`, `value`, `kind`, `inner`, `intro`, `updated`, `created` FROM `dict` WHERE `key`=? LIMIT 1 [login]"
+time=2024-06-15T19:51:25.928 level=INF caller=echo ip=127.0.0.1 GET=/api/dict/login span=4.5859ms
+time=2024-06-15T19:51:25.939 level=INF caller=echo ip=127.0.0.1 GET=/api/auth/vcode span=14.9411ms
+time=2024-06-15T19:51:36.633 level=DBG caller=D:/root/code/goblog/internal/service/kernel/auth.go:41 args={"num":"iadmin","vcode":"0226","vreal":"Ks8CZ0JlvV9XbvMouE3w5w.1718452345.6DmOjt-ITPO1miYglJBn-A","passwd":"123456"} msg=login
+time=2024-06-15T19:51:36.634 level=INF caller=xorm msg="[SQL] SELECT `id`, `num`, `name`, `passwd`, `avatar`, `salt`, `phone`, `email`, `role_id`, `updated`, `created` FROM `admin` WHERE `num`=? LIMIT 1 [iadmin]"
+time=2024-06-15T19:51:36.636 level=INF caller=xorm msg="[SQL] BEGIN TRANSACTION [] - 759.7µs"
+time=2024-06-15T19:51:36.638 level=INF caller=xorm msg="[SQL] INSERT INTO `log` (`admin_id`,`module`,`action`,`data`,`created`) VALUES (?,?,?,?,?) [1 auth 登录 {\"e\":1718538696,\"c\":{\"u\":1,\"r\":1,\"a\":true}} 1718452296] - 1.0215ms"
+time=2024-06-15T19:51:36.638 level=INF caller=xorm msg="[SQL] ROLLBACK []"
+time=2024-06-15T19:51:36.638 level=INF caller=echo ip=127.0.0.1 POST=/api/auth/login span=7.3556ms
+time=2024-06-15T19:51:38.484 level=INF caller=xorm msg="[SQL] SELECT `id`, `guid`, `name`, `group`, `routes`, `sort`, `inner`, `updated`, `created` FROM `grant` [] - 506.4µs"
+time=2024-06-15T19:51:38.485 level=INF caller=echo ip=127.0.0.1 GET=/api/auth/grant span=1.0257ms
+time=2024-06-15T19:51:38.721 level=INF caller=xorm msg="[SQL] SELECT `id`, `num`, `name`, `passwd`, `avatar`, `salt`, `phone`, `email`, `role_id`, `updated`, `created` FROM `admin` WHERE `id`=? LIMIT 1 [1]"
+time=2024-06-15T19:51:38.721 level=INF caller=echo ip=127.0.0.1 GET=/api/auth/get span=1.2511ms
+time=2024-06-15T19:51:38.726 level=INF caller=echo ip=127.0.0.1 GET=/api/status/go span=1.2017ms
+time=2024-06-15T19:51:38.772 level=INF caller=echo ip=127.0.0.1 GET=/static/upload/202405/0723jxbupmmjww7fhq.jpg span=11.8132ms
+time=2024-06-15T19:51:56.249 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `log` []"
+time=2024-06-15T19:51:56.249 level=INF caller=echo ip=127.0.0.1 GET=/api/log/page?pi=1&ps=12&mult= span=611.6µs
+time=2024-06-15T19:51:58.136 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `log` []"
+time=2024-06-15T19:51:58.136 level=INF caller=echo ip=127.0.0.1 GET=/api/log/page?pi=1&ps=12&mult= span=0s
+time=2024-06-15T19:52:01.122 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `log` []"
+time=2024-06-15T19:52:01.123 level=INF caller=echo ip=127.0.0.1 GET=/api/log/page?pi=1&ps=12&mult= span=504.5µs
+time=2024-06-15T19:52:07.981 level=INF caller=xorm msg="[SQL] SELECT `id`, `kind`, `name`, `intro`, `color` FROM `cate` []"
+time=2024-06-15T19:52:07.982 level=INF caller=echo ip=127.0.0.1 GET=/api/cate/list?kind=0 span=2.1692ms
+time=2024-06-15T19:52:07.983 level=INF caller=xorm msg="[SQL] SELECT `key`, `value`, `kind`, `inner`, `intro`, `updated`, `created` FROM `dict` WHERE `key`=? LIMIT 1 [basic]"
+time=2024-06-15T19:52:07.983 level=INF caller=echo ip=127.0.0.1 GET=/api/dict/basic span=470.3µs
+time=2024-06-15T19:52:07.994 level=INF caller=xorm msg="[SQL] SELECT `id`, `kind`, `status`, `title`, `path`, `summary`, `updated`, `created` FROM `post` ORDER BY `id` DESC LIMIT 12 [] - 9.1766ms"
+time=2024-06-15T19:52:07.994 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `post` []"
+time=2024-06-15T19:52:07.994 level=INF caller=xorm msg="[SQL] SELECT `id`, `kind`, `name`, `intro`, `color` FROM `cate` [] - 10.8631ms"
+time=2024-06-15T19:52:07.994 level=INF caller=echo ip=127.0.0.1 GET=/api/cate/list span=11.0182ms
+time=2024-06-15T19:52:07.996 level=INF caller=echo ip=127.0.0.1 GET=/api/post/page?kind=0&cate_id=0&mult=&pi=1&ps=12 span=11.1963ms
+time=2024-06-15T19:52:13.543 level=INF caller=xorm msg="[SQL] SELECT `id`, `kind`, `status`, `title`, `path`, `summary`, `updated`, `created` FROM `post` ORDER BY `id` DESC LIMIT 12 [] - 504.4µs"
+time=2024-06-15T19:52:13.543 level=INF caller=xorm msg="[SQL] SELECT count(*) FROM `post` []"
+time=2024-06-15T19:52:13.543 level=INF caller=echo ip=127.0.0.1 GET=/api/post/page?kind=0&cate_id=0&mult=&pi=1&ps=12 span=504.4µs
+time=2024-06-15T19:52:21.130 level=INF caller=xorm msg="[SQL] SELECT `id`, `cate_id`, `kind`, `status`, `title`, `path`, `summary`, `markdown`, `richtext`, `allow`, `updated`, `created` FROM `post` WHERE `kind`=? AND `path`=? LIMIT 1 [1 init] - 591µs"
+time=2024-06-15T19:52:21.136 level=INF caller=xorm msg="[SQL] SELECT `id`, `cate_id`, `kind`, `status`, `title`, `path`, `summary`, `markdown`, `richtext`, `allow`, `updated`, `created` FROM `post` WHERE (kind = ? and status = ? and created >?) ORDER BY `created` ASC LIMIT 1 [1 2 1715107048878] - 5.7453ms"
+time=2024-06-15T19:52:21.137 level=INF caller=xorm msg="[SQL] SELECT `id`, `cate_id`, `kind`, `status`, `title`, `path`, `summary`, `markdown`, `richtext`, `allow`, `updated`, `created` FROM `post` WHERE (kind = ? and status = ? and created <?) ORDER BY `created` DESC LIMIT 1 [1 2 1715107048878] - 1.0228ms"
+time=2024-06-15T19:52:21.146 level=INF caller=echo ip=127.0.0.1 GET=/posts/init.html span=18.0886ms
+time=2024-06-15T19:52:21.287 level=INF caller=echo ip=127.0.0.1 GET=/static/css/app.css span=128.6224ms
+time=2024-06-15T19:52:21.287 level=INF caller=echo ip=127.0.0.1 GET=/static/js/app.js span=120.8128ms
+time=2024-06-15T19:52:21.289 level=INF caller=echo ip=127.0.0.1 GET=/static/upload/202405/0723jxbuq5ea4pfwaw.jpg span=122.8657ms
+time=2024-06-15T19:52:21.301 level=INF caller=echo ip=127.0.0.1 GET=/static/bg.jpg span=2.74ms
+time=2024-06-15T19:52:21.405 level=INF caller=echo ip=127.0.0.1 GET=/static/font/iconfont.ttf span=4.5843ms
+time=2024-06-15T19:52:21.877 level=INF caller=echo ip=127.0.0.1 GET=/favicon.ico span=1.841ms
+time=2024-06-15T19:52:39.712 level=INF caller=D:/root/code/goblog/test.go:66 msg="app quitted"
