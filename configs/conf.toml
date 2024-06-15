@@ -7,6 +7,13 @@ host = "0.0.0.0"
 page_min = 5
 page_max = 30
 
+# tokenkey一般不修改
+token_key = "token"
+# 过期时间 h
+token_exp = 24
+# 加密私钥-一般要修改
+token_secret ="secret"
+
 # 数据库
 [db]
 # mysql\sqlite

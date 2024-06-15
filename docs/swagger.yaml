@@ -1,0 +1,1831 @@
+definitions:
+  model.Admin:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      created:
+        description: 创建时间
+        type: integer
+      email:
+        description: 邮箱
+        type: string
+      id:
+        description: 主键
+        type: integer
+      name:
+        description: 名称
+        type: string
+      num:
+        description: 账号
+        type: string
+      phone:
+        description: 手机
+        type: string
+      role_id:
+        description: 角色
+        type: integer
+      salt:
+        type: string
+      updated:
+        description: 修改时间
+        type: integer
+    type: object
+  model.AdminLoginArgs:
+    properties:
+      num:
+        description: 账号
+        type: string
+      passwd:
+        description: 密码
+        type: string
+      vcode:
+        description: 验证码
+        type: string
+      vreal:
+        description: 验证码原始值
+        type: string
+    type: object
+  model.Cate:
+    properties:
+      children:
+        description: 树形-多级笔记使用
+        items:
+          $ref: '#/definitions/model.Cate'
+        type: array
+      color:
+        description: 颜色
+        type: string
+      created:
+        description: 创建时间
+        type: integer
+      id:
+        description: 主键
+        type: integer
+      intro:
+        description: 描述
+        type: string
+      kind:
+        description: 类型1-文章，2-页面，3-笔记
+        type: integer
+      name:
+        description: 分类名
+        type: string
+      updated:
+        description: 修改时间
+        type: integer
+    type: object
+  model.Dict:
+    properties:
+      created:
+        description: 创建时间
+        type: integer
+      inner:
+        description: 内部-禁止删除
+        type: boolean
+      intro:
+        description: 说明
+        type: string
+      key:
+        description: 唯一Key
+        type: string
+      kind:
+        description: 类型 JSON,INT，TIME，BOOL,STRING
+        type: string
+      updated:
+        description: 修改时间
+        type: integer
+      value:
+        description: 值
+        type: string
+    type: object
+  model.Grant:
+    properties:
+      created:
+        description: 创建时间
+        type: integer
+      group:
+        description: 组
+        type: string
+      guid:
+        description: 全局唯一标识符（GUID，Globally Unique Identifier）
+        type: string
+      id:
+        description: 主键
+        type: integer
+      inner:
+        description: 内部禁止删除
+        type: boolean
+      name:
+        description: 名称
+        type: string
+      routes:
+        description: api 路由
+        items:
+          type: string
+        type: array
+      sort:
+        description: 排序id
+        type: integer
+      updated:
+        description: 修改时间
+        type: integer
+    type: object
+  model.IptId:
+    properties:
+      id:
+        description: 仅包含Id的请求
+        type: integer
+    type: object
+  model.Log:
+    properties:
+      action:
+        description: 做了什么
+        type: string
+      admin_id:
+        description: 用户id
+        type: integer
+      created:
+        type: integer
+      data:
+        description: 数据
+        type: string
+      id:
+        type: integer
+      module:
+        description: 模块
+        type: string
+    type: object
+  model.PasswdArgs:
+    properties:
+      npasswd:
+        description: 新密码
+        type: string
+      opasswd:
+        description: 旧密码
+        type: string
+    type: object
+  model.Post:
+    properties:
+      allow:
+        description: 允许评论
+        type: boolean
+      cate:
+        allOf:
+        - $ref: '#/definitions/model.Cate'
+        description: 分类
+      cate_id:
+        description: 分类Id
+        type: integer
+      created:
+        description: 创建时间
+        type: integer
+      id:
+        description: 主键
+        type: integer
+      kind:
+        description: 类型1-文章，2-页面，3-笔记
+        type: integer
+      markdown:
+        description: markdown内容
+        type: string
+      path:
+        description: 访问路径
+        type: string
+      richtext:
+        description: 富文本内容
+        type: string
+      status:
+        description: 状态1-草稿，2-已发布
+        type: integer
+      summary:
+        description: 摘要
+        type: string
+      tags:
+        description: 标签
+        items:
+          $ref: '#/definitions/model.Tag'
+        type: array
+      title:
+        description: 标题
+        type: string
+      updated:
+        description: 修改时间
+        type: integer
+    type: object
+  model.PostShareArgs:
+    properties:
+      day:
+        type: integer
+      post_id:
+        type: integer
+    type: object
+  model.Role:
+    properties:
+      created:
+        description: 创建时间
+        type: integer
+      id:
+        description: 主键
+        type: integer
+      inner:
+        description: 内部禁止删除
+        type: boolean
+      intro:
+        description: 角色描述
+        type: string
+      name:
+        description: 角色名称
+        type: string
+    type: object
+  model.StateGo:
+    properties:
+      arch:
+        type: string
+      num_cpu:
+        type: integer
+      num_goroutine:
+        type: integer
+      os:
+        type: string
+      version:
+        type: string
+    type: object
+  model.Tag:
+    properties:
+      color:
+        description: 颜色
+        type: string
+      created:
+        description: 创建时间
+        type: integer
+      id:
+        description: 主键
+        type: integer
+      intro:
+        description: 描述
+        type: string
+      name:
+        description: 标签名
+        type: string
+      updated:
+        description: 修改时间
+        type: integer
+    type: object
+  utils.Reply:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/admin/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Admin'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 添加admin信息
+      tags:
+      - kernel
+  /api/admin/all:
+    get:
+      parameters:
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - in: query
+        name: role_id
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 获取admin分页数据
+      tags:
+      - kernel
+  /api/admin/drop:
+    post:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 删除admin信息
+      tags:
+      - kernel
+  /api/admin/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Admin'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 修改admin信息
+      tags:
+      - kernel
+  /api/admin/edit/lock:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: json
+        in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            id:
+              type: integer
+            lock:
+              type: boolean
+          type: object
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 修改用户锁定状态
+      tags:
+      - kernel
+  /api/admin/exist:
+    get:
+      parameters:
+      - description: 账号
+        in: query
+        name: num
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 获取某个用户信息
+      tags:
+      - kernel
+  /api/admin/get:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Admin'
+              type: object
+      summary: 通过id获取admin信息
+      tags:
+      - kernel
+  /api/admin/page:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      - in: query
+        name: role_id
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 获取admin分页数据
+      tags:
+      - kernel
+  /api/auth/edit:
+    post:
+      parameters:
+      - description: 登录凭证
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Admin'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 修改自己的信息
+      tags:
+      - kernel
+      - auth
+  /api/auth/edit/passwd:
+    post:
+      parameters:
+      - description: 登录凭证
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.PasswdArgs'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            $ref: '#/definitions/utils.Reply'
+      summary: 修改自己的密码
+      tags:
+      - kernel
+      - auth
+  /api/auth/get:
+    get:
+      parameters:
+      - description: 登录凭证
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Admin'
+              type: object
+      summary: 当前登录信息
+      tags:
+      - kernel
+  /api/auth/grant:
+    get:
+      parameters:
+      - description: 登录凭证
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    type: string
+                  type: array
+              type: object
+      summary: 获取当前用户的授权
+      tags:
+      - kernel
+      - auth
+  /api/auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminLoginArgs'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 登陆
+      tags:
+      - kernel
+      - auth
+  /api/auth/vcode:
+    get:
+      consumes:
+      - multipart/form-data
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 验证码
+      tags:
+      - kernel
+      - auth
+  /api/cate/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Cate'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 分类添加数据
+      tags:
+      - cate
+  /api/cate/drop:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 仅包含Id的请求
+        in: query
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 分类删除数据
+      tags:
+      - cate
+  /api/cate/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Cate'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 分类修改数据
+      tags:
+      - cate
+  /api/cate/get:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Cate'
+              type: object
+      summary: 分类单条数据
+      tags:
+      - cate
+  /api/cate/list:
+    get:
+      parameters:
+      - in: query
+        name: kind
+        type: integer
+      - description: 条数限制(<=0不限制)
+        in: query
+        name: limit
+        type: integer
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Cate'
+                  type: array
+              type: object
+      summary: 分类列表数据
+      tags:
+      - cate
+  /api/cate/page:
+    get:
+      parameters:
+      - in: query
+        name: kind
+        type: integer
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Cate'
+                  type: array
+              type: object
+      summary: 获取分类分页
+      tags:
+      - cate
+  /api/dict/:key:
+    get:
+      parameters:
+      - description: key
+        in: path
+        name: key
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Dict'
+              type: object
+      summary: 通过id获取单条字典
+      tags:
+      - kernel
+  /api/dict/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Dict'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 添加字典
+      tags:
+      - kernel
+  /api/dict/drop:
+    post:
+      parameters:
+      - description: key
+        in: query
+        name: key
+        required: true
+        type: string
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 通过key删除单条字典
+      tags:
+      - kernel
+  /api/dict/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Dict'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 修改字典
+      tags:
+      - kernel
+  /api/dict/get/:key:
+    get:
+      parameters:
+      - description: key
+        in: path
+        name: key
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Dict'
+              type: object
+      summary: 通过id获取单条字典
+      tags:
+      - kernel
+  /api/dict/page:
+    get:
+      parameters:
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Dict'
+                  type: array
+              type: object
+      summary: 获取字典分页
+      tags:
+      - kernel
+  /api/grant/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Grant'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 添加授权信息
+      tags:
+      - kernel
+  /api/grant/drop:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: json
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.IptId'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 通过id删除单条授权信息
+      tags:
+      - kernel
+  /api/grant/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Grant'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 修改授权信息
+      tags:
+      - kernel
+  /api/grant/get:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Grant'
+              type: object
+      summary: 通过id获取单条授权信息
+      tags:
+      - kernel
+  /api/grant/page:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Grant'
+                  type: array
+              type: object
+      summary: 获取授权分页信息
+      tags:
+      - kernel
+  /api/grant/tree:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Grant'
+                  type: array
+              type: object
+      summary: 获取所有授权树
+      tags:
+      - kernel
+  /api/log/page:
+    get:
+      parameters:
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Log'
+                  type: array
+              type: object
+      summary: 获取日志分页
+      tags:
+      - kernel
+  /api/post/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Post'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 博文添加数据
+      tags:
+      - post
+  /api/post/drop:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 仅包含Id的请求
+        in: query
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 博文删除数据
+      tags:
+      - post
+  /api/post/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Post'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 博文修改数据
+      tags:
+      - post
+  /api/post/get:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Post'
+              type: object
+      summary: 博文单条数据
+      tags:
+      - post
+  /api/post/list:
+    get:
+      parameters:
+      - in: query
+        name: cate_id
+        type: integer
+      - in: query
+        name: kind
+        type: integer
+      - description: 条数限制(<=0不限制)
+        in: query
+        name: limit
+        type: integer
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Post'
+                  type: array
+              type: object
+      summary: 博文列表数据
+      tags:
+      - post
+  /api/post/page:
+    get:
+      parameters:
+      - in: query
+        name: cate_id
+        type: integer
+      - in: query
+        name: kind
+        type: integer
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      - in: query
+        name: status
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Post'
+                  type: array
+              type: object
+      summary: 获取博文分页
+      tags:
+      - post
+  /api/post/save:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Post'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 博文笔记类型保存
+      tags:
+      - post
+  /api/post/share:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.PostShareArgs'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 博文分享
+      tags:
+      - post
+  /api/role/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Role'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 添加角色信息
+      tags:
+      - kernel
+  /api/role/all:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Role'
+                  type: array
+              type: object
+      summary: 获取所有角色信息
+      tags:
+      - kernel
+  /api/role/drop:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: json
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.IptId'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 通过id删除单条角色信息
+      tags:
+      - kernel
+  /api/role/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Role'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 修改角色信息
+      tags:
+      - kernel
+  /api/role/get:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Role'
+              type: object
+      summary: 通过id获取单条角色信息
+      tags:
+      - kernel
+  /api/role/grant/all:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: role_id
+        required: true
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Role'
+              type: object
+      summary: 通过角色id获取所有角色授权信息
+      tags:
+      - kernel
+  /api/role/grant/edit:
+    post:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 修改角色授权信息
+      tags:
+      - kernel
+  /api/role/page:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Role'
+                  type: array
+              type: object
+      summary: 获取角色分页信息
+      tags:
+      - kernel
+  /api/status/app:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.StateGo'
+              type: object
+      summary: 获取服务器go信息
+      tags:
+      - kernel
+  /api/status/go:
+    get:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.StateGo'
+              type: object
+      summary: 获取服务器go信息
+      tags:
+      - kernel
+  /api/tag/add:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Tag'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 标签添加数据
+      tags:
+      - tag
+  /api/tag/drop:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 仅包含Id的请求
+        in: query
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 标签删除数据
+      tags:
+      - tag
+  /api/tag/edit:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      - description: 请求数据
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.Tag'
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 标签修改数据
+      tags:
+      - tag
+  /api/tag/get:
+    get:
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Tag'
+              type: object
+      summary: 标签单条数据
+      tags:
+      - tag
+  /api/tag/list:
+    get:
+      parameters:
+      - description: 条数限制(<=0不限制)
+        in: query
+        name: limit
+        type: integer
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Tag'
+                  type: array
+              type: object
+      summary: 标签列表数据
+      tags:
+      - tag
+  /api/tag/page:
+    get:
+      parameters:
+      - description: 多条件信息
+        in: query
+        name: mult
+        type: string
+      - description: 分页页码
+        in: query
+        name: pi
+        type: integer
+      - description: 分页大小
+        in: query
+        name: ps
+        type: integer
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Tag'
+                  type: array
+              type: object
+      summary: 获取标签分页
+      tags:
+      - tag
+  /api/upload/file:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 上传文件
+      tags:
+      - kernel
+  /api/upload/image:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 返回数据
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Reply'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 上传图片并裁剪
+      tags:
+      - kernel
+swagger: "2.0"

@@ -5,13 +5,20 @@ import (
 )
 
 type config struct {
-	Title   string `toml:"title"`
-	Mode    string `toml:"mode"`
-	Host    string `toml:"host"`
-	Port    int    `toml:"port"`
-	PageMin int    `toml:"page_min"` //最小分页大小
-	PageMax int    `toml:"page_max"` //最大分页大小
-	Db      struct {
+	Title       string `toml:"title"`
+	Mode        string `toml:"mode"`
+	Host        string `toml:"host"`
+	Port        int    `toml:"port"`
+	Endpoint    string `toml:"endpoint"`     //
+	TokenKey    string `toml:"token_key"`    //token关键词
+	TokenExp    int    `toml:"token_exp"`    //过期时间 h
+	TokenSecret string `toml:"token_secret"` //加密私钥
+	ImageCut    bool   `toml:"image_cut"`    //图片裁剪
+	ImageWidth  int    `toml:"image_width"`  //图片宽度
+	ImageHeight int    `toml:"image_height"` //图片高度
+	PageMin     int    `toml:"page_min"`     //最小分页大小
+	PageMax     int    `toml:"page_max"`     //最大分页大小
+	Db          struct {
 		Type   string `toml:"type"`   //数据库类型 mysql sqlite
 		Mysql  string `toml:"mysql"`  //uid:pass@tcp(host:port)/dbname?charset=utf8mb4&parseTime=true&loc=Local
 		Sqlite string `toml:"sqlite"` //"file:sqlite.db?journal_mode=WAL"
